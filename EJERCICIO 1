@@ -1,0 +1,70 @@
+EJERCICIO 01
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(
+    home: Page1(),
+  ));
+}
+
+/*class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context){
+    return MaterialApp(
+      initialRoute: "/",
+      routes: {
+        "/": (context) => Page1(),
+        "/page2" : (context) => Page2(title: 'Page 2',)
+      },
+    );
+  }
+}*/
+
+class Page1 extends StatelessWidget{
+  @override
+  Widget build(BuildContext context){
+    return Scaffold( 
+      appBar: AppBar(
+        title: Text('Esta es la página 1'),
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Page2()));
+              }, 
+              child: Text("Ir a la siguiente página")
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Page2 extends StatelessWidget{
+  @override
+  Widget build(BuildContext context){
+    return Scaffold( 
+      appBar: AppBar(
+        title: Text('Esta es la página 2'),
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              }, 
+              child: Text("Volver a la página anterior")
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+EJERCICIO 02
+EJERCICIO 03
