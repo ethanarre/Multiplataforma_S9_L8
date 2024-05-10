@@ -67,4 +67,152 @@ class Page2 extends StatelessWidget{
 }
 
 EJERCICIO 02
+//main.dart
+import 'package:flutter/material.dart';
+import 'routes.dart';
+void main() {
+  runApp(MyApp());
+}
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      routes: routes
+    );
+  }
+}
+//routes.dart
+import 'package:flutter/material.dart';
+import 'page2.dart';
+import 'page1.dart';
+final Map<String, WidgetBuilder> routes = {
+  "/": (context) => Page1(),
+  "/page2": (context) => Page2(),
+};
+//page1
+import 'package:flutter/material.dart';
+
+class Page1 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Esta es la página 1'),
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/page2");
+              },
+              child: Text("Ir a la siguiente página"),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+//page2
+import 'package:flutter/material.dart';
+
+class Page2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Esta es la página 2'),
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text("Volver"),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 EJERCICIO 03
+//page1
+import 'package:flutter/material.dart';
+
+class Page1 extends StatefulWidget {
+  @override
+  _Page1State createState() => _Page1State();
+}
+
+class _Page1State extends State<Page1> {
+  TextEditingController _textEditingController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Esta es la página 1'),
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            TextField(
+              controller: _textEditingController,
+              decoration: InputDecoration(
+                labelText: 'Ingresa un texto',
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/page2",
+                    arguments: _textEditingController.text);
+              },
+              child: Text("Ir a la siguiente página"),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+//page2
+import 'package:flutter/material.dart';
+
+class Page2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final String? text = ModalRoute.of(context)?.settings.arguments as String?;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Esta es la página 2'),
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Text(
+              'Texto ingresado:',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              text ?? 'No se ingresó ningún texto',
+              style: TextStyle(fontSize: 16),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text("Volver"),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
